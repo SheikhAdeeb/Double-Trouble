@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -46,6 +47,8 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
 
     boolean gameOver = false;
 
+    boolean title = true;
+
     SnakeGame(int boardWidth, int boardHeight) {
         this.BOARD_HEIGHT = boardWidth;
         this.BOARD_WIDTH = boardHeight;
@@ -64,13 +67,26 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
 
         placeFood();
 
-        gameLoop = new Timer(100, this);
+        gameLoop = new Timer(200, this);
         gameLoop.start();
     }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        draw(g);
+        // draw(g);
+        title(g);
+    }
+
+    public void title(Graphics g) {
+        g.setFont(getFont().deriveFont(Font.BOLD, 50F));
+        String text = "Double Trouble";
+        int length = (int) g.getFontMetrics().getStringBounds(text, g).getWidth();
+        int x = BOARD_WIDTH / 2 - length / 2;
+        int y = TILE_SIZE * 7;
+
+        g.setColor(Color.WHITE);
+        g.drawString(text, x, y);
+
     }
 
     public void draw(Graphics g) {
