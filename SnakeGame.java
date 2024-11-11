@@ -1,11 +1,14 @@
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -16,6 +19,7 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
     final int BOARD_WIDTH;
     final int BOARD_HEIGHT;
     final int TILE_SIZE = 20;
+    final int MOVING_Y_VALUE = TILE_SIZE * 19;
 
     private class Tile {
         int x;
@@ -48,6 +52,9 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
     boolean gameOver = false;
 
     boolean title = true;
+    Font pixelSport;
+
+    int movingY = MOVING_Y_VALUE;
 
     SnakeGame(int boardWidth, int boardHeight) {
         this.BOARD_HEIGHT = boardWidth;
@@ -67,25 +74,62 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
 
         placeFood();
 
+        InputStream is = getClass().getResourceAsStream("/font/PixelSport-nRVRV.ttf");
+        try {
+            pixelSport = Font.createFont(Font.TRUETYPE_FONT, is);
+        } catch (FontFormatException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
         gameLoop = new Timer(200, this);
         gameLoop.start();
     }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        // draw(g);
-        title(g);
+        if (title) {
+            title(g);
+        } else {
+            draw(g);
+        }
     }
 
     public void title(Graphics g) {
-        g.setFont(getFont().deriveFont(Font.BOLD, 50F));
+        g.setColor(new Color(70, 120, 80));
+        g.fillRect(0, 0, BOARD_WIDTH, BOARD_HEIGHT);
+
+        g.setFont(pixelSport);
+        g.setFont(g.getFont().deriveFont(Font.BOLD, 70F));
         String text = "Double Trouble";
         int length = (int) g.getFontMetrics().getStringBounds(text, g).getWidth();
         int x = BOARD_WIDTH / 2 - length / 2;
         int y = TILE_SIZE * 7;
 
+        // Shadow
+        g.setColor(Color.BLACK);
+        g.drawString(text, x + 5, y + 5);
+
+        // Text
         g.setColor(Color.WHITE);
         g.drawString(text, x, y);
+
+        // MENU
+        g.setFont(g.getFont().deriveFont(Font.BOLD, 40F));
+        text = "Press Enter to Start";
+        length = (int) g.getFontMetrics().getStringBounds(text, g).getWidth();
+        if (movingY > MOVING_Y_VALUE) {
+            movingY = MOVING_Y_VALUE;
+        } else {
+            movingY = MOVING_Y_VALUE + 15;
+        }
+        x = BOARD_WIDTH / 2 - length / 2;
+
+        g.setColor(Color.WHITE);
+        g.drawString(text, x, movingY);
 
     }
 
