@@ -56,6 +56,8 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
 
     int movingY = MOVING_Y_VALUE;
 
+    int score;
+
     SnakeGame(int boardWidth, int boardHeight) {
         this.BOARD_HEIGHT = boardWidth;
         this.BOARD_WIDTH = boardHeight;
@@ -85,7 +87,7 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
             e.printStackTrace();
         }
 
-        gameLoop = new Timer(100, this);
+        gameLoop = new Timer(200, this);
         gameLoop.start();
     }
 
@@ -173,6 +175,20 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
         for (int i = 0; i < snakeBody2.size(); i++) {
             Tile snakePart = snakeBody2.get(i);
             g.fillRect(snakePart.x * TILE_SIZE, snakePart.y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+        }
+
+        g.setColor(Color.WHITE);
+        g.setFont(pixelSport);
+        score = snakeBody1.size() + snakeBody2.size();
+        g.setFont(g.getFont().deriveFont(Font.BOLD, 30F));
+        g.drawString("Score: " + Integer.toString(score), TILE_SIZE, TILE_SIZE * 2);
+        if (gameOver) {
+            g.setFont(g.getFont().deriveFont(Font.BOLD, 70F));
+            String text = "Game Over";
+            int length = (int) g.getFontMetrics().getStringBounds(text, g).getWidth();
+            int x = BOARD_WIDTH / 2 - length / 2;
+            int y = TILE_SIZE * 15;
+            g.drawString(text, x, y);
         }
     }
 
@@ -275,6 +291,10 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
         } else {
             return false;
         }
+    }
+
+    public void restart() {
+
     }
 
     @Override
