@@ -131,6 +131,12 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
         g.setColor(Color.WHITE);
         g.drawString(text, x, movingY);
 
+        velocityX1 = 0;
+        velocityY1 = 0;
+
+        velocityX2 = 0;
+        velocityY2 = 0;
+
     }
 
     public void draw(Graphics g) {
@@ -311,6 +317,8 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
         }
         if (e.getKeyCode() == KeyEvent.VK_ENTER) {
             title = false;
+            velocityX1 = 1;
+            velocityX2 = -1;
         }
     }
 

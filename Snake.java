@@ -5,7 +5,7 @@ public class Snake {
     final static int BOARD_HEIGHT = 600;
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Snake"); // new Frame
+        JFrame frame = new JFrame("Double Trouble"); // new Frame
         frame.setVisible(true); // make Frame visible
 
         frame.setSize(BOARD_WIDTH, BOARD_HEIGHT); // frame size
