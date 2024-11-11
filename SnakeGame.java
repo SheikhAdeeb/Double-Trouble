@@ -85,7 +85,7 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
             e.printStackTrace();
         }
 
-        gameLoop = new Timer(200, this);
+        gameLoop = new Timer(100, this);
         gameLoop.start();
     }
 
@@ -134,9 +134,12 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
     }
 
     public void draw(Graphics g) {
+        // Background
+        g.setColor(new Color(0, 0, 0));
+        g.fillRect(0, 0, BOARD_WIDTH, BOARD_HEIGHT);
 
         // Grid
-        g.setColor(Color.DARK_GRAY);
+        // g.setColor(Color.black);
         for (int i = 0; i < BOARD_WIDTH / TILE_SIZE; i++) {
             g.drawLine(i * TILE_SIZE, 0, i * TILE_SIZE, BOARD_HEIGHT); // columns
             g.drawLine(0, i * TILE_SIZE, BOARD_WIDTH, i * TILE_SIZE); // rows
@@ -305,6 +308,9 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
         } else if (e.getKeyCode() == KeyEvent.VK_D && velocityX2 != -1) {
             velocityX2 = 1;
             velocityY2 = 0;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+            title = false;
         }
     }
 
