@@ -158,7 +158,7 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
         g.fillRect(food.x * TILE_SIZE, food.y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
 
         // Snake1
-        g.setColor(Color.green);
+        g.setColor(new Color(129, 186, 123));
         g.fillRect(snakeHead1.x * TILE_SIZE, snakeHead1.y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
 
         // SnakeBody1
@@ -168,7 +168,7 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
         }
 
         // Snake
-        g.setColor(Color.pink);
+        g.setColor(new Color(219, 138, 192));
         g.fillRect(snakeHead2.x * TILE_SIZE, snakeHead2.y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
 
         // SnakeBody
@@ -294,7 +294,23 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
     }
 
     public void restart() {
+        gameOver = false;
+        title = true;
+        gameLoop.start();
+        score = 0;
 
+        velocityX1 = 0;
+        velocityY1 = 0;
+        velocityX2 = 0;
+        velocityY2 = 0;
+
+        snakeBody1.clear();
+        snakeBody2.clear();
+
+        snakeHead1.x = 5;
+        snakeHead1.y = 5;
+        snakeHead2.x = 15;
+        snakeHead2.y = 15;
     }
 
     @Override
@@ -339,6 +355,10 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
             title = false;
             velocityX1 = 1;
             velocityX2 = -1;
+        }
+
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            restart();
         }
     }
 
