@@ -24,4 +24,4 @@ Local multiplayer game inspired by Snake but with a twist. How long can you coor
 
 - This game is supposed to be played by 2 people
 
-- If attempted to play as a single player game, the difficulty curve is insanely high but possible.
+- If attempted to play as a single player game, the difficulty curve is insanely high but possible
