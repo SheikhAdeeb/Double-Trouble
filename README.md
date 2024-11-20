@@ -5,7 +5,7 @@ Single-player game inspired by Snake but with a twist. How far can you go withou
 
 # Installation
 
-- Click on the `Double Trouble.jar` file and the `Download raw file`
+- Click on the `Double Trouble.jar` file
 - Press the `Download raw file` button
 
 # Instructions
