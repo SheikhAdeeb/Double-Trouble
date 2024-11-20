@@ -1,6 +1,6 @@
 import javax.swing.JFrame;
 
-public class Snake {
+public class DoubleTrouble {
     final static int BOARD_WIDTH = 600;
     final static int BOARD_HEIGHT = 600;
 

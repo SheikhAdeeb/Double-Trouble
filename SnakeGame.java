@@ -87,7 +87,7 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
             e.printStackTrace();
         }
 
-        gameLoop = new Timer(200, this);
+        gameLoop = new Timer(100, this);
         gameLoop.start();
     }
 
